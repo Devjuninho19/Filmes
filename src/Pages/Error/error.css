@@ -1,0 +1,8 @@
+.container h1 {
+  width: 100%;
+  height: calc(180vh - 60px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 130px;
+}
