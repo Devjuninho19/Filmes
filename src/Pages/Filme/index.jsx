@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import api from '../../service/api'
 import "./filme.css"
 const index = () => {
   const {id} = useParams()
+  const navigate = useNavigate()
   const [filme, setFilme] = useState({})
   const [loading, setLoading] = useState(true)
   useEffect(()=>{
@@ -20,6 +21,8 @@ setLoading(false)
 })
 .catch(()=>{
   console.log("FILME NÃO ENCONTRADO")
+  navigate("/",{replace: true})
+  return;
 })
 }
 loadFilme()
@@ -27,7 +30,7 @@ loadFilme()
 return() =>{
   console.log("desmontado")
 }
-  },[])
+  },[navigate, id])
 if(loading){
   return(
     <div className='filme-info'>
@@ -45,7 +48,7 @@ if(loading){
 <div className='area-button'>
 <button>Salvar</button>
 <button>
-  <a href="#">Trailer</a>
+  <a target='blank' href={`https://youtube.com/results?search_query=${filme.title} trailer`}>Trailer</a>
 </button>
 </div>
     </div>
