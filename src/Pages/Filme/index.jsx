@@ -31,6 +31,21 @@ return() =>{
   console.log("desmontado")
 }
   },[navigate, id])
+
+  function salvarFilme() {
+   const minhaLista = localStorage.getItem("@flix")
+   let filmeSalvo = JSON.parse(minhaLista) || []
+
+   const hasFilme = filmeSalvo.some((filmeSalvo) => filmeSalvo.id === filme.id)
+
+   if(hasFilme){
+    alert("ESSE FILME ESTÁ NA LISTA")
+    return;
+   }
+   filmeSalvo.push(filme)
+   localStorage.setItem("@flix", JSON.stringify(filmeSalvo))
+   alert("FILME SALVO COM SUCESSO")
+  }
 if(loading){
   return(
     <div className='filme-info'>
@@ -46,7 +61,7 @@ if(loading){
 <span>{filme.overview}</span>
 <strong>Avaliação: {filme.vote_average} /10</strong>
 <div className='area-button'>
-<button>Salvar</button>
+<button onClick={salvarFilme}>Salvar</button>
 <button>
   <a target='blank' href={`https://youtube.com/results?search_query=${filme.title} trailer`}>Trailer</a>
 </button>
