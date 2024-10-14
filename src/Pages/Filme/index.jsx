@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import api from '../../service/api'
+import { toast } from 'react-toastify'
 import "./filme.css"
 const index = () => {
   const {id} = useParams()
@@ -39,12 +40,12 @@ return() =>{
    const hasFilme = filmeSalvo.some((filmeSalvo) => filmeSalvo.id === filme.id)
 
    if(hasFilme){
-    alert("ESSE FILME ESTÁ NA LISTA")
+    toast.warn("Esse filme já está na sua lista")
     return;
    }
    filmeSalvo.push(filme)
    localStorage.setItem("@flix", JSON.stringify(filmeSalvo))
-   alert("FILME SALVO COM SUCESSO")
+   toast.success("Filme salvo com sucesso!")
   }
 if(loading){
   return(
